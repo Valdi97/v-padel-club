@@ -57,3 +57,45 @@ SELECT
     apellido,
     telefono
 FROM clientes;
+
+-- =========================================
+-- PRUEBA: ELIMINACION DE CLIENTES
+-- =========================================
+
+-- 1. Intento inicial de eliminacion
+-- Error 1175: Safe Update Mode activado
+
+-- DELETE FROM clientes
+-- WHERE telefono IN (
+--     '8095551234',
+--     '8295555678',
+--     '8495559012'
+-- );
+
+
+-- 2. Solucion: desactivar Safe Updates
+-- Se utilizo para permitir la eliminacion
+-- mediante el numero de telefono
+
+-- SET SQL_SAFE_UPDATES = 0;
+
+
+-- 3. Eliminacion de los tres clientes
+-- Resultado: registros eliminados correctamente
+
+-- DELETE FROM clientes
+-- WHERE telefono IN (
+--     '8095551234',
+--     '8295555678',
+--     '8495559012'
+-- );
+
+
+-- 4. Reactivar Safe Updates
+-- SET SQL_SAFE_UPDATES = 1;
+
+
+-- 5. Verificar la eliminacion
+
+SELECT *
+FROM clientes;
