@@ -1,0 +1,59 @@
+-- =========================================
+-- V PADEL CLUB
+-- PRUEBAS DE LA TABLA CLIENTES
+-- =========================================
+
+USE v_padel_club;
+
+-- 1. Insertar tres clientes de prueba
+
+INSERT INTO clientes (
+    nombre,
+    apellido,
+    telefono,
+    fecha_nacimiento,
+    sexo,
+    nivel
+)
+VALUES
+(
+    'Carlos',
+    'Martínez',
+    '8095551234',
+    '1995-06-15',
+    'M',
+    'B+'
+),
+(
+    'María',
+    'Rodríguez',
+    '8295555678',
+    '1998-03-20',
+    'F',
+    'C+'
+),
+(
+    'Pedro',
+    'Gómez',
+    '8495559012',
+    '1990-11-05',
+    'M',
+    NULL
+);
+
+
+-- 2. Consultar los clientes registrados
+
+SELECT *
+FROM clientes;
+
+
+-- 3. Consultar los identificadores
+-- antes de eliminar los registros
+
+SELECT
+    id_cliente,
+    nombre,
+    apellido,
+    telefono
+FROM clientes;
