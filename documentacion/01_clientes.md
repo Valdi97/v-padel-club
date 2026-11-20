@@ -63,7 +63,47 @@ He utilizado la consulta `DESCRIBE clientes` para revisar la estructura de la ta
 
 La consulta permite comprobar los nombres de los campos, los tipos de datos, las restricciones `NULL` y la clave primaria.
 
-**Pendiente:** realizar pruebas de inserción y comprobar el comportamiento de las restricciones.
+### Prueba de inserción de clientes
+
+Para comprobar que la tabla funcionaba correctamente, realicé una inserción múltiple utilizando `INSERT INTO`.
+
+Registré tres clientes ficticios:
+
+| Nombre | Apellido | Sexo | Nivel |
+|---|---|---|---|
+| Carlos | Martínez | M | B+ |
+| María | Rodríguez | F | C+ |
+| Pedro | Gómez | M | NULL |
+
+Con esta prueba comprobé que podía insertar varios registros mediante una sola consulta SQL.
+
+También utilicé un valor `NULL` en el nivel de Pedro para representar a una persona que no tiene un nivel de pádel registrado.
+
+Posteriormente consulté los registros mediante `SELECT * FROM clientes` para comprobar la información almacenada.
+
+Una vez realizadas las pruebas, eliminé los tres registros para dejar la tabla vacía.
+
+El código utilizado se encuentra en `sql/02_pruebas_clientes.sql`.
+
+### Incidencia y solución — Error 1175
+
+Durante la eliminación de los tres clientes de prueba, encontré el **Error 1175 de MySQL Workbench (Safe Update Mode)**.
+
+Inicialmente intenté eliminar los registros utilizando `DELETE FROM` con una condición `WHERE` basada en los números de teléfono.
+
+MySQL bloqueó la operación porque tenía activado el modo Safe Updates, que protege contra eliminaciones o modificaciones accidentales cuando no se utiliza una columna clave en la condición.
+
+Para solucionarlo, desactivé Safe Updates y volví a ejecutar la consulta utilizando los números de teléfono de los clientes.
+
+Esta vez, los tres registros fueron eliminados correctamente.
+
+Finalmente, ejecuté `SELECT * FROM clientes` para comprobar que la tabla había quedado vacía.
+
+**Resultado:** incidencia resuelta y registros de prueba eliminados.
+
+**Conceptos aplicados:** `DELETE FROM`, `WHERE`, `IN` y `SQL_SAFE_UPDATES`.
+
+**Aprendizaje:** comprendí cómo funciona la protección Safe Updates de MySQL y por qué es recomendable mantenerla activada para evitar modificaciones accidentales.
 
 ## 6. Próximo paso
 
